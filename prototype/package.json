@@ -1,0 +1,8 @@
+{
+  "name": "sax-18andup-prototype",
+  "private": true,
+  "description": "Sax Institute / 18 and Up clickable HTML prototype",
+  "scripts": {
+    "start": "npx --yes serve -l 4173 ."
+  }
+}

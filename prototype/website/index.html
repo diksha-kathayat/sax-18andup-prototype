@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>18 and Up Study | Sax Institute</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0C2340;
+      --sky: #71C5E8;
+      --lime: #8EDD65;
+      --yellow: #F3EFA1;
+      --white: #fff;
+      --muted: #475569;
+      --bg: #E8F6FC;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid #D7E8F0;
+    }
+    header img { height: 36px; width: auto; }
+    .hero {
+      background: var(--navy);
+      color: #fff;
+      padding: 28px 20px 32px;
+    }
+    .hero img.logo {
+      width: 180px;
+      background: #fff;
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: 1.65rem;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    .hero p { color: #E8F6FC; font-size: 0.98rem; max-width: 34ch; }
+    .cta {
+      display: block;
+      margin-top: 20px;
+      background: var(--sky);
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+      padding: 14px 16px;
+      border-radius: 12px;
+    }
+    .panel { padding: 22px 20px; }
+    .panel h2 { font-size: 1.15rem; margin-bottom: 10px; }
+    .panel p { color: var(--muted); font-size: 0.95rem; margin-bottom: 12px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 18px; }
+    .chip {
+      background: var(--bg);
+      border: 1px solid #D7E8F0;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .note {
+      background: var(--yellow);
+      border-left: 4px solid var(--navy);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+    }
+    footer {
+      padding: 18px 20px 28px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid #D7E8F0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="../sax-logo.png" alt="Sax Institute" />
+    <a href="./app.html" style="color:var(--navy);font-weight:600;font-size:0.9rem;text-decoration:none;">Open app</a>
+  </header>
+  <section class="hero">
+    <img class="logo" src="../logo-18andup.png" alt="18 and Up Study" />
+    <h1>Help shape a healthier future for generations to come</h1>
+    <p>Your experiences matter. Take part in 18 and Up, a long-term study led by the Sax Institute.</p>
+    <a class="cta" id="openApp" href="./app.html">Continue to the 18 and Up app</a>
+  </section>
+  <section class="panel">
+    <h2>Why take part?</h2>
+    <p>Share information about your life, health and wellbeing over time so researchers can understand what shapes health across Australian families.</p>
+    <div class="chips">
+      <span class="chip">Ages 18+</span>
+      <span class="chip">Voluntary</span>
+      <span class="chip">Secure</span>
+      <span class="chip">iRECS 10573</span>
+    </div>
+    <div class="note">Questions? Email 18andUp@saxinstitute.org.au or call 1300 45 11 45 (Mon–Fri 9am–5pm AEST).</div>
+  </section>
+  <footer>Prototype for Sax Institute · not a live enrolment site</footer>
+  <script>
+    document.getElementById("openApp").addEventListener("click", function (e) {
+      if (window.parent && window.parent !== window) {
+        e.preventDefault();
+        window.parent.postMessage({ type: "evo-register" }, "*");
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us | EvoDental</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #1b2a3d;
+      --navy-deep: #121c2a;
+      --orange: #e34312;
+      --coral: #f15b31;
+      --white: #ffffff;
+      --muted: #4a5a73;
+      --border: #d6d6d6;
+      --whatsapp: #25d366;
+      --evo-blue-light: #e8eef4;
+      --font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --display: Poppins, Inter, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      color: var(--navy);
+      background: var(--navy-deep);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* —— Header —— */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(18, 28, 42, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      min-width: 64px;
+    }
+
+    .back svg { width: 18px; height: 18px; }
+
+    .logo img {
+      height: 34px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+
+    .header-spacer { min-width: 64px; }
+
+    /* —— Hero —— */
+    .hero {
+      position: relative;
+      min-height: 220px;
+      padding: 28px 20px 36px;
+      overflow: hidden;
+      color: #fff;
+      background:
+        linear-gradient(165deg, rgba(18, 28, 42, 0.55) 0%, rgba(18, 28, 42, 0.88) 55%, var(--navy-deep) 100%),
+        url("https://www.evodental.com/wp-content/uploads/2026/07/IMG_5514-HDR-1-600x400.jpg") center / cover no-repeat;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffb49a;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 8vw, 2.45rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 0.98rem;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 28ch;
+      line-height: 1.45;
+    }
+
+    /* —— Sheet content —— */
+    .sheet {
+      margin-top: -18px;
+      position: relative;
+      z-index: 2;
+      background: #f4f6f8;
+      border-radius: 22px 22px 0 0;
+      padding: 22px 16px 40px;
+      min-height: 55vh;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 10px 4px;
+    }
+
+    /* App focus — primary */
+    .app-panel {
+      background:
+        radial-gradient(ellipse 80% 70% at 100% 0%, rgba(243, 91, 49, 0.18), transparent 55%),
+        linear-gradient(160deg, #fff 0%, #fff8f5 100%);
+      border: 1px solid rgba(227, 67, 18, 0.18);
+      border-radius: 18px;
+      padding: 22px 18px 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 28px rgba(27, 42, 61, 0.08);
+    }
+
+    .app-panel-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .app-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--navy);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 6px 16px rgba(27, 42, 61, 0.25);
+      overflow: hidden;
+    }
+
+    .app-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .app-panel h2 {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .app-panel .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 2px;
+    }
+
+    .app-panel .copy {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .app-points {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .app-points li {
+      list-style: none;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .app-points li::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff0eb;
+      flex-shrink: 0;
+      margin-top: 1px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5 6.5 11.5 12.5 4.5' fill='none' stroke='%23e34312' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: 12px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .register-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: var(--orange);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 15px 18px;
+      border-radius: 12px;
+      border: 0;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(227, 67, 18, 0.28);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .register-btn:active { transform: scale(0.98); opacity: 0.92; }
+
+    /* Three actions */
+    .actions-block {
+      margin-top: 4px;
+    }
+
+    .actions-block h3 {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px 4px;
+    }
+
+    .actions-block .lead {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 0 0 14px 4px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    .action {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 14px 14px 12px;
+      border: 0;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(27, 42, 61, 0.05);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      color: var(--navy);
+      transition: transform 0.12s ease;
+    }
+
+    .action:active { transform: scale(0.99); }
+
+    .action .ico {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+    }
+
+    .action .ico svg { width: 22px; height: 22px; }
+
+    .action--phone .ico { background: var(--evo-blue-light); color: var(--navy); }
+    .action--callback .ico { background: var(--navy); color: #fff; }
+    .action--whatsapp .ico { background: #e7f8ed; color: #128c7e; }
+
+    .action strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .action em {
+      display: block;
+      font-style: normal;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .action .chev {
+      color: #9aa8b8;
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+
+    .foot-note {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #8a97a8;
+    }
+
+    /* Callback modal — same as website homepage */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(27, 42, 61, 0.55);
+      z-index: 200;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--white);
+      border-radius: 16px 16px 0 0;
+      padding: 28px 18px 24px;
+      max-width: 100%;
+      width: 100%;
+      position: relative;
+      max-height: 88vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border: none;
+      width: 36px;
+      height: 36px;
+      background: #e34312;
+      color: var(--white);
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    .modal h3 {
+      font-family: var(--display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--navy);
+      padding-right: 48px;
+      letter-spacing: -0.02em;
+    }
+
+    .modal-intro {
+      font-size: 0.9rem;
+      color: var(--navy);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .modal-form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .modal-form-grid .field-full { grid-column: 1 / -1; }
+
+    .modal .field { margin-bottom: 0; }
+
+    .modal label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+
+    .modal input,
+    .modal select {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 11px 12px;
+      font: 15px Inter, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+    }
+
+    .modal-consent {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+
+    .modal-radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .modal-radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 0.875rem;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .modal-radio-group input { width: auto; }
+
+    .modal-checkbox-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.45;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .modal-checkbox-row input {
+      width: auto;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .modal-app-promo {
+      margin-top: 4px;
+      padding: 16px;
+      background: #faf3f1;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .modal-app-promo p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .modal-app-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 28px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 999px;
+    }
+
+    .modal-submit {
+      display: block;
+      width: 100%;
+      margin: 20px auto 0;
+      background: var(--orange);
+      color: var(--white);
+      border: none;
+      border-radius: 999px;
+      padding: 14px 32px;
+      font: 600 1rem Inter, sans-serif;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="back" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6 9 12l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </a>
+    <a class="logo" href="index.html" aria-label="EvoDental home">
+      <img src="https://www.evodental.com/wp-content/uploads/2025/05/evovectorlogo.svg" alt="EvoDental" />
+    </a>
+    <span class="header-spacer" aria-hidden="true"></span>
+  </header>
+
+  <section class="hero">
+    <p class="hero-kicker">EvoDental · UK clinics</p>
+    <h1>Contact us</h1>
+    <p>Start in the app, or speak with our team whenever you need.</p>
+  </section>
+
+  <main class="sheet">
+    <p class="section-label">Recommended</p>
+
+    <section class="app-panel" aria-label="EvoDental app">
+      <div class="app-panel-top">
+        <div class="app-icon" aria-hidden="true">
+          <img src="../icon.png" alt="" />
+        </div>
+        <div>
+          <p class="eyebrow">EvoDental app</p>
+          <h2>Your digital companion</h2>
+        </div>
+      </div>
+      <p class="copy">Prepare for your assessment, complete forms, and access education and recovery support — all in one place via WeGuide.</p>
+      <ul class="app-points">
+        <li>Guided journey from enquiry to recovery</li>
+        <li>Assessments, resources and clinic contact</li>
+        <li>Secure, personal to your treatment path</li>
+      </ul>
+      <a class="register-btn" href="#register" data-prototype-register>Register now</a>
+    </section>
+
+    <section class="actions-block" aria-label="Contact the team">
+      <h3>Speak with the team</h3>
+      <p class="lead">Choose how you’d like to get in touch.</p>
+      <div class="actions">
+        <a class="action action--phone" href="tel:08081410813">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span>
+            <strong>Call us</strong>
+            <em>0808 141 0813</em>
+          </span>
+          <span class="chev" aria-hidden="true">›</span>
+        </a>
+
+        <button type="button" class="action action--callback" id="callbackBtn">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
+          </span>
+          <span>
+            <strong>Request a callback</strong>
+            <em>We’ll call you back</em>
+          </span>
+          <span class="chev" aria-hidden="true">›</span>
+        </button>
+
+        <a class="action action--whatsapp" href="https://wa.me/448000584242" target="_blank" rel="noopener noreferrer">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.003 0h-.006C7.165 0 0 7.167 0 16c0 3.503 1.13 6.75 3.053 9.385L1.05 31.33l6.15-1.967A15.9 15.9 0 0 0 16.003 32C24.835 32 32 24.832 32 16S24.835 0 16.003 0Zm9.31 22.598c-.386 1.09-1.92 1.995-3.143 2.26-.836.178-1.928.32-5.604-1.204-4.703-1.948-7.73-6.727-7.965-7.037-.226-.31-1.9-2.53-1.9-4.826 0-2.296 1.166-3.42 1.636-3.9.386-.394.84-.573 1.32-.573.156 0 .296.008.422.014.379.016.57.038.82.638.31.752 1.07 2.605 1.16 2.795.092.19.184.448.058.758-.118.32-.222.46-.43.708-.21.248-.41.438-.618.704-.19.232-.404.482-.164.896.24.408 1.07 1.762 2.296 2.855 1.582 1.41 2.857 1.86 3.318 2.052.343.142.752.108 1.002-.16.317-.343.708-.912 1.106-1.472.282-.4.638-.45.998-.32.367.13 2.32 1.094 2.72 1.294.4.2.664.296.762.464.097.168.097.964-.288 2.054Z"/></svg>
+          </span>
+          <span>
+            <strong>WhatsApp</strong>
+            <em>Message us anytime</em>
+          </span>
+          <span class="chev" aria-hidden="true">›</span>
+        </a>
+      </div>
+    </section>
+
+    <p class="foot-note">Clinics across the UK · Mon–Fri support</p>
+  </main>
+
+  <div class="modal-overlay" id="callbackModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <h3 id="modalTitle">Request a callback</h3>
+      <p class="modal-intro">Complete the form below and one of our team will be in touch within the next 24 hours</p>
+      <form id="callbackForm">
+        <div class="modal-form-grid">
+          <div class="field">
+            <label for="cbFirstName">First name*</label>
+            <input id="cbFirstName" type="text" required placeholder="Jane" />
+          </div>
+          <div class="field">
+            <label for="cbSurname">Surname*</label>
+            <input id="cbSurname" type="text" required placeholder="Smith" />
+          </div>
+          <div class="field">
+            <label for="cbEmail">Email Address*</label>
+            <input id="cbEmail" type="email" required placeholder="jane@example.co.uk" />
+          </div>
+          <div class="field">
+            <label for="cbPhone">Mobile number*</label>
+            <input id="cbPhone" type="tel" required placeholder="0800 470 3052" />
+          </div>
+          <div class="field">
+            <label for="cbClinic">Preferred clinic*</label>
+            <select id="cbClinic" required>
+              <option value="">Please Select</option>
+              <option>Bristol</option>
+              <option>Dartford</option>
+              <option>Edinburgh</option>
+              <option>Glasgow</option>
+              <option>Liverpool</option>
+              <option>London</option>
+              <option>Manchester</option>
+            </select>
+          </div>
+          <div class="field">
+            <p class="modal-consent">I would like to receive communications from the practice about services, offers, events and other information that may be relevant to me. I understand I can withdraw my consent at any time.*</p>
+            <div class="modal-radio-group">
+              <label><input type="radio" name="comms" value="yes" /> Yes</label>
+              <label><input type="radio" name="comms" value="no" /> No</label>
+            </div>
+          </div>
+          <div class="modal-app-promo">
+            <p>If you'd like your EvoDental digital companion, register on our app now and start your journey today.</p>
+            <a class="modal-app-btn" href="#register" data-prototype-register>Register now</a>
+          </div>
+          <div class="field field-full">
+            <label class="modal-checkbox-row">
+              <input type="checkbox" id="cbNhs" required />
+              <span>I understand this treatment is not NHS-funded and no free clinical trials or grants are available*</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="modal-submit">Request consultation</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var modal = document.getElementById("callbackModal");
+      var btn = document.getElementById("callbackBtn");
+      var close = document.getElementById("modalClose");
+      var form = document.getElementById("callbackForm");
+
+      btn.addEventListener("click", function () {
+        modal.classList.add("open");
+      });
+
+      close.addEventListener("click", function () {
+        modal.classList.remove("open");
+      });
+
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) modal.classList.remove("open");
+      });
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        modal.classList.remove("open");
+        alert("Thank you — in the live site, your callback request would be sent to the EvoDental team.");
+        form.reset();
+      });
+
+      function openPrototypeRegister(e) {
+        if (e) e.preventDefault();
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: "evo-register" }, "*");
+          return;
+        }
+        window.location.href = "../index.html?start=splash";
+      }
+      document.querySelectorAll("[data-prototype-register]").forEach(function (el) {
+        el.addEventListener("click", openPrototypeRegister);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+.DS_Store
+*.log
+node_modules/
+
+# Local screenshots / scratch (not part of the live prototype)
+18up-page.png
+sax-homepage.png
+sax-settings-tab5.png
+settings-saved.png
+weguide-*.png
+Untitled/
+
+# Prototype scratch / unused source assets
+prototype/figma-ref/
+prototype/build_sax_patch.py
+prototype/onboard-1.png
+prototype/onboard-2.png
+prototype/onboard-3.png
