@@ -29,12 +29,12 @@ The prototype **starts on the onboarding screen**, then walks through:
 
 1. Create account / Login → magic-link verification  
 2. Welcome letter → Terms → Important information  
-3. Home hub (WeGuide/EvoDental card pattern): Your participation · Your Journey · Contact · Settings  
+3. App home is **Your Journey** (WeGuide your-actions): logo, greeting, today’s date, scheduled tasks with **Start**, then **Completed Entries** with timestamp + **View**  
 4. Tabs: **Your Journey** · **Information** · **Your participation** · **Settings**  
-   - Journey: Introduction → eConsent → Demographics  
+   - Journey: only scheduled forms appear (Introduction → eConsent → Demographics)  
    - Information: three accordion sections (About, Taking part, Privacy and support)  
    - Your participation: Goals-tab style overview card  
-5. Contact opens as a **modal/overlay** (Home or Settings), not as a tab  
+5. Contact opens as a **modal/overlay** from Settings, not as a tab  
 
 ## Intentionally not included
 
@@ -53,4 +53,4 @@ These are not productized in WeGuide frontend:
 
 ## Deep links
 
-`?start=onboarding` (default) · `login` · `home` · `journey` · `program` · `goals` · `splash` · `ios-home` · `website`
+`?start=onboarding` (default) · `login` · `journey` (app home) · `program` · `goals` · `splash` · `ios-home` · `website`
