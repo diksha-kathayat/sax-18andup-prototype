@@ -1869,14 +1869,23 @@
       .wg-task-list li {
         display: grid;
         grid-template-columns: auto 1fr auto;
-        gap: 1rem;
+        gap: 0.9rem;
         align-items: center;
-        padding: 1.1rem 0;
+        padding: 1.35rem 0;
         border-bottom: 1px solid var(--gray-200);
       }
 
       .wg-task-list li:first-child {
         border-top: 1px solid var(--gray-200);
+      }
+
+      .wg-task-list li:last-child {
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .wg-task-list + .section-label.spaced,
+      #todayEmpty + .section-label.spaced {
+        margin-top: 2rem;
       }
 
       .chip {
@@ -3034,6 +3043,12 @@
       .viz {
         display: grid;
         gap: 0.9rem;
+        text-align: left;
+        width: 100%;
+      }
+      .viz > * {
+        min-width: 0;
+        max-width: 100%;
       }
       .viz-bleed {
         display: block;
@@ -3051,24 +3066,27 @@
       }
       .viz-kicker {
         margin: 0;
-        font-size: 0.7rem;
+        font-size: 0.72rem;
         font-weight: 700;
         letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #e06540;
+        color: #71C5E8;
+        text-align: left;
       }
       .viz-line {
         margin: 0;
         font-size: 0.95rem;
         color: var(--muted);
-        line-height: 1.5;
+        line-height: 1.55;
+        text-align: left;
       }
       .viz-tag {
         margin: 0.15rem 0 0;
-        text-align: center;
+        text-align: left;
         font-style: italic;
-        color: #e06540;
+        color: var(--navy);
         font-size: 0.9rem;
+        line-height: 1.45;
       }
       .viz-pills {
         display: flex;
@@ -3144,7 +3162,22 @@
         gap: 0;
       }
       .education-image-grid .education-copy {
-        padding: 0 0.1rem;
+        padding: 0;
+        text-align: left;
+      }
+      .education-image-grid .education-copy strong {
+        display: block;
+        font-size: 0.95rem;
+        color: var(--navy);
+        margin: 0 0 0.15rem;
+        text-align: left;
+      }
+      .education-image-grid .education-copy span {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.4;
+        text-align: left;
       }
       .viz-rail {
         display: grid;
@@ -3213,14 +3246,29 @@
         line-height: 1.4;
       }
       .viz-banner {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        background: #E8F6FC;
+        border-radius: 0 14px 14px 0;
+        padding: 12px 14px;
+        border: 0;
+        border-left: 4px solid #71C5E8;
+        color: var(--navy);
+        font-size: 0.92rem;
+        line-height: 1.5;
+        text-align: left;
+      }
+      .viz-banner:has(img) {
         display: grid;
         grid-template-columns: 72px 1fr;
         gap: 0.75rem;
         align-items: center;
-        background: #faf3f1;
+        background: #E8F6FC;
         border-radius: 14px;
         padding: 0.75rem;
-        border: 1px solid #f0e4df;
+        border: 1px solid #d7eef8;
+        border-left: 1px solid #d7eef8;
       }
       .viz-banner img {
         width: 72px;
@@ -3229,15 +3277,21 @@
         border-radius: 10px;
       }
       .viz-banner strong {
-        display: block;
-        font-size: 0.9rem;
+        display: inline;
+        font-size: inherit;
+        font-weight: 700;
         color: var(--navy);
-        margin-bottom: 0.15rem;
+        margin: 0;
       }
       .viz-banner span {
-        font-size: 0.78rem;
-        color: var(--muted);
-        line-height: 1.4;
+        font-size: inherit;
+        color: var(--navy);
+        line-height: 1.5;
+      }
+
+      .viz-banner.viz-banner-alert {
+        background: #F3EFA1;
+        border-left-color: #0C2340;
       }
       .viz-check-grid {
         display: grid;
@@ -3782,6 +3836,75 @@
 
       .q-text {
         min-height: 0;
+      }
+
+      .q-signature {
+        border: 1.5px solid var(--gray-300);
+        border-radius: 14px;
+        background: #fff;
+        overflow: hidden;
+      }
+      .q-signature-pad {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 2 / 1;
+        background: #fafafa;
+        touch-action: none;
+      }
+      .q-signature-pad canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: crosshair;
+      }
+      .q-signature-pad .sig-line {
+        position: absolute;
+        left: 12%;
+        right: 12%;
+        bottom: 28%;
+        border-bottom: 1px solid var(--gray-300);
+        pointer-events: none;
+      }
+      .q-signature-pad .sig-placeholder {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+        pointer-events: none;
+      }
+      .q-signature-pad.has-ink .sig-placeholder {
+        display: none;
+      }
+      .q-signature-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        padding: 0.55rem 0.75rem;
+        border-top: 1px solid var(--gray-200);
+        background: #fff;
+      }
+      .q-signature-actions button {
+        border: 0;
+        background: rgba(12, 35, 64, 0.1);
+        color: var(--navy);
+        font: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border-radius: 999px;
+        padding: 0.45rem 0.9rem;
+        cursor: pointer;
+      }
+      .q-signature-actions button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .q-fields .wg-q + .wg-q {
+        margin-top: 1.35rem;
+      }
+      .q-fields-intro {
+        margin: 0 0 1.35rem;
       }
 
       .q-fields {
@@ -6136,7 +6259,7 @@
                   <img class="viz-bleed tall journey-hero" src="./onboard-1-crop.png" alt="Australian family" />
                   <p class="viz-kicker">A long-term national study led by the Sax Institute</p>
                   <p class="viz-line">You are invited to join 18 and Up, which brings together multiple generations of Australians to understand how health and wellbeing change across families and time. It builds on the 45 and Up Study.</p>
-                  <div class="viz-banner" style="background:#E8F6FC;border-left:4px solid #71C5E8;padding:12px 14px;border-radius:0 10px 10px 0"><strong>Your experiences matter. By taking part, you help researchers understand what shapes health in Australia.</strong></div>
+                  <div class="viz-banner"><strong>Your experiences matter. By taking part, you help researchers understand what shapes health in Australia.</strong></div>
                   <div class="viz-grid education-image-grid" style="margin-top:14px">
                     <div class="viz-tile"><div class="education-copy"><strong>18+</strong><span>Adults aged 18 and over</span></div></div>
                     <div class="viz-tile"><div class="education-copy"><strong>1 to 2 yrs</strong><span>Follow-up surveys</span></div></div>
@@ -6171,7 +6294,7 @@
                     <div class="viz-rail-item"><span class="viz-rail-num">4</span><div><strong>Family grouping</strong><span>Your information can be grouped, in coded form, with family who also join</span></div></div>
                     <div class="viz-rail-item"><span class="viz-rail-num">5</span><div><strong>Future research contact</strong><span>Choose whether we may contact you about related research</span></div></div>
                   </div>
-                  <div class="viz-banner" style="background:#E8F6FC;border-left:4px solid #71C5E8;padding:12px 14px;border-radius:0 10px 10px 0;margin-top:12px"><strong>Taking part is voluntary.</strong> You can skip a survey or withdraw at any time. Your decision will not affect your healthcare.</div>
+                  <div class="viz-banner"><strong>Taking part is voluntary.</strong> You can skip a survey or withdraw at any time. Your decision will not affect your healthcare.</div>
                   <p class="viz-line" style="margin-top:12px"><strong>If questions feel personal:</strong> Lifeline 13 11 14 · Beyond Blue 1300 22 4636 · 13YARN 13 92 76</p>
                 </div>`,
             }),
@@ -6181,7 +6304,7 @@
                 <div class="viz">
                   <p class="viz-kicker">Who can take part?</p>
                   <p class="viz-line">You can join if you are aged 18 years or over, and you are a 45 and Up participant OR a family member, close kin or chosen family member of someone in the 45 and Up Study.</p>
-                  <div class="viz-banner" style="background:#E8F6FC;border-left:4px solid #71C5E8;padding:12px 14px;border-radius:0 10px 10px 0"><strong>Ethics:</strong> UNSW HREC iRECS 10573. Complaints: 02 9385 6222 or humanethics@unsw.edu.au.</div>
+                  <div class="viz-banner"><strong>Ethics:</strong> UNSW HREC iRECS 10573. Complaints: 02 9385 6222 or humanethics@unsw.edu.au.</div>
                   <p class="viz-line" style="margin-top:12px">Questions? 18andUp@saxinstitute.org.au or 1300 45 11 45 (Monday to Friday, 9am to 5pm AEST).</p>
                 </div>`,
             }),
@@ -6199,7 +6322,7 @@
               title: "You need to be 18 or over",
               html: `
                 <div class="viz">
-                  <div class="viz-banner" style="background:#F3EFA1;border-left:4px solid #0C2340;padding:12px 14px;border-radius:0 10px 10px 0"><strong>18 and Up is for adults aged 18 years or over.</strong></div>
+                  <div class="viz-banner viz-banner-alert"><strong>18 and Up is for adults aged 18 years or over.</strong></div>
                   <p class="viz-line" style="margin-top:12px">If you are under 18, you cannot join at this time. If this invitation was meant for someone else in your family, please pass it to them.</p>
                   <p class="viz-line">If you think this is a mistake, contact 18andUp@saxinstitute.org.au or 1300 45 11 45.</p>
                 </div>`,
@@ -6223,7 +6346,7 @@
               title: "We can help you work this out",
               html: `
                 <div class="viz">
-                  <div class="viz-banner" style="background:#E8F6FC;border-left:4px solid #71C5E8;padding:12px 14px;border-radius:0 10px 10px 0">If you are not sure how you received this invitation, the 18 and Up team can help.</div>
+                  <div class="viz-banner">If you are not sure how you received this invitation, the 18 and Up team can help.</div>
                   <p class="viz-line" style="margin-top:12px">Check your invitation letter or email for a 45 and Up ID, or contact us before you consent.</p>
                   <p class="viz-line">Email 18andUp@saxinstitute.org.au or call 1300 45 11 45 (Monday to Friday, 9am to 5pm AEST).</p>
                 </div>`,
@@ -6245,7 +6368,7 @@
                 <div class="viz">
                   <p class="viz-kicker">Talk to us before you consent</p>
                   <p class="viz-line">You can discuss 18 and Up with someone you trust, or with the study team, before you decide.</p>
-                  <div class="viz-banner" style="background:#E8F6FC;border-left:4px solid #71C5E8;padding:12px 14px;border-radius:0 10px 10px 0">18andUp@saxinstitute.org.au<br>1300 45 11 45 (Monday to Friday, 9am to 5pm AEST)<br>UNSW ethics complaints: 02 9385 6222</div>
+                  <div class="viz-banner">18andUp@saxinstitute.org.au<br>1300 45 11 45 (Monday to Friday, 9am to 5pm AEST)<br>UNSW ethics complaints: 02 9385 6222</div>
                   <p class="viz-tag">You can close this form and come back when you are ready. Your account stays open.</p>
                 </div>`,
             },
@@ -6283,9 +6406,10 @@
         econsent: {
           title: "eConsent: 18 and Up",
           steps: [
-            rich({
+            {
+              type: "fields",
               title: "Before you consent",
-              html: `
+              introHtml: `
                 <div class="viz">
                   <img class="evo-logo" src="./logo-18andup.png" alt="18 and Up Study" />
                   <p class="viz-kicker">Participant information</p>
@@ -6297,54 +6421,48 @@
                   </div>
                   <p class="viz-line" style="margin-top:12px">The Sax Institute stores your information securely. Researchers usually receive de-identified data only.</p>
                 </div>`,
-            }),
-            {
-              type: "single",
-              required: true,
-              key: "readPis",
-              title: "Have you had enough information about the study to decide whether to take part?",
-              options: ["Yes", "No, I need more information"],
-              paths: {
-                1: {
-                  title: "Please pause before consenting",
-                  body: "Browse Information in the app, or contact 18andUp@saxinstitute.org.au / 1300 45 11 45 before you continue.",
+              fields: [
+                {
+                  key: "readPis",
+                  type: "select",
+                  required: true,
+                  label: "Have you had enough information about the study to decide whether to take part?",
+                  options: ["Yes", "No, I need more information"],
                 },
-              },
+              ],
             },
             {
-              type: "single",
-              required: true,
-              title: "I understand that taking part is voluntary and I can withdraw at any time.",
-              options: ["I understand", "I do not understand"],
-              paths: {
-                1: {
-                  title: "Please contact the study team",
-                  body: "We are happy to explain. Email 18andUp@saxinstitute.org.au or call 1300 45 11 45.",
+              type: "fields",
+              title: "Your consent",
+              fields: [
+                {
+                  key: "voluntary",
+                  type: "select",
+                  required: true,
+                  label: "I understand that taking part is voluntary and I can withdraw at any time.",
+                  options: ["I understand", "I do not understand"],
                 },
-              },
-            },
-            {
-              type: "single",
-              required: true,
-              title: "I agree to take part in the 18 and Up Study.",
-              options: ["I agree", "I do not agree"],
-              paths: {
-                1: {
-                  title: "Thank you for considering 18 and Up",
-                  body: "You do not have to join. If you change your mind later, you can contact the study team.",
+                {
+                  key: "agree",
+                  type: "select",
+                  required: true,
+                  label: "I agree to take part in the 18 and Up Study.",
+                  options: ["I agree", "I do not agree"],
                 },
-              },
-            },
-            {
-              type: "single",
-              title: "Optional: I consent to linkage of my study data with health and related records (for example Services Australia), where approved.",
-              options: ["Yes", "No", "I am unsure / prefer not to say"],
+                {
+                  key: "linkage",
+                  type: "select",
+                  label: "Optional: I consent to linkage of my study data with health and related records (for example Services Australia), where approved.",
+                  options: ["Yes", "No", "I am unsure / prefer not to say"],
+                },
+              ],
             },
             {
               type: "fields",
               title: "Your electronic signature",
               fields: [
                 { key: "fullName", type: "text", label: "Full name", required: true, placeholder: "Type your full name" },
+                { key: "signature", type: "signature", label: "Signature", required: true },
                 { key: "signDate", type: "date", label: "Date", required: true, defaultToday: true },
               ],
             },
@@ -6584,23 +6702,12 @@
       }
 
       function scheduleSurveyPush(formId) {
+        // Enrolment forms unlock on schedule immediately so users never need to tap a push.
         if (!formId || !FORMS[formId] || completedForms.has(formId)) return;
-        if (surveyPushSent.has(formId) || visibleSurveys.has(formId)) return;
+        visibleSurveys.add(formId);
         surveyPushSent.add(formId);
-        const title = TASK_META[formId] || "New survey";
-        const messages = {
-          waitingCheckIn: "A quick check-in is ready while the team prepares for your call.",
-          bookConsultation: "Your pre-assessment call is complete. Consultation booking is now open.",
-          prepConsultation: "Your consultation preparation checklist is ready.",
-          consultationDay: "See what will happen on your consultation day.",
-        };
-        setTimeout(() => {
-          showPush(
-            title,
-            messages[formId] || "A new activity is ready. Tap to view it in Your Journey.",
-            () => unlockSurveyFromPush(formId)
-          );
-        }, 900);
+        hidePush();
+        renderHomeTasks();
       }
 
       function scheduleEducationEmail() {
@@ -6636,8 +6743,9 @@
         const nextId = peekNextFormId();
         if (nextId) {
           visibleSurveys.add(nextId);
-          scheduleSurveyPush(nextId);
+          surveyPushSent.add(nextId);
         }
+        hidePush();
         renderHomeTasks();
       }
 
@@ -6758,7 +6866,7 @@
             {
               id: "what",
               title: "What is 18 and Up?",
-              body: `<div class="viz"><p class="viz-kicker">Long-term national study</p><p class="viz-line">18 and Up is led by the Sax Institute. It brings together multiple generations of Australians to understand how health and wellbeing change across families and time.</p><p class="viz-line">It builds on the 45 and Up Study, Australia’s largest ongoing study of healthy ageing.</p><div class="viz-banner" style="background:#E8F6FC;border-left:4px solid #71C5E8;padding:12px 14px;border-radius:0 10px 10px 0"><strong>Your experiences help researchers produce better health evidence for Australia.</strong></div></div>`,
+              body: `<div class="viz"><p class="viz-kicker">Long-term national study</p><p class="viz-line">18 and Up is led by the Sax Institute. It brings together multiple generations of Australians to understand how health and wellbeing change across families and time.</p><p class="viz-line">It builds on the 45 and Up Study, Australia’s largest ongoing study of healthy ageing.</p><div class="viz-banner"><strong>Your experiences help researchers produce better health evidence for Australia.</strong></div></div>`,
             },
             {
               id: "who",
@@ -6775,7 +6883,7 @@
             {
               id: "need-to-do",
               title: "What do I need to do?",
-              body: `<div class="viz"><p class="viz-line">Start with the introduction, then complete eConsent if you wish to join. After that, a short about-you form helps the study understand who is taking part.</p><p class="viz-line">Follow-up surveys are sent about every 1 to 2 years. You can complete them on your phone, tablet, or computer.</p><div class="viz-banner" style="background:#E8F6FC;border-left:4px solid #71C5E8;padding:12px 14px;border-radius:0 10px 10px 0"><strong>You choose how much to share. There is no right or wrong answer.</strong></div></div>`,
+              body: `<div class="viz"><p class="viz-line">Start with the introduction, then complete eConsent if you wish to join. After that, a short about-you form helps the study understand who is taking part.</p><p class="viz-line">Follow-up surveys are sent about every 1 to 2 years. You can complete them on your phone, tablet, or computer.</p><div class="viz-banner"><strong>You choose how much to share. There is no right or wrong answer.</strong></div></div>`,
             },
             {
               id: "how-long",
@@ -6792,12 +6900,12 @@
             {
               id: "looked-after",
               title: "How is my information looked after?",
-              body: `<div class="viz"><p class="viz-line">The Sax Institute stores your information securely. Researchers only receive de-identified data, unless you have given extra consent (for example Services Australia linkage).</p><p class="viz-line">The study is approved by the UNSW Human Research Ethics Committee (iRECS 10573).</p><div class="viz-banner" style="background:#E8F6FC;border-left:4px solid #71C5E8;padding:12px 14px;border-radius:0 10px 10px 0"><strong>Privacy questions: privacy@saxinstitute.org.au</strong></div></div>`,
+              body: `<div class="viz"><p class="viz-line">The Sax Institute stores your information securely. Researchers only receive de-identified data, unless you have given extra consent (for example Services Australia linkage).</p><p class="viz-line">The study is approved by the UNSW Human Research Ethics Committee (iRECS 10573).</p><div class="viz-banner"><strong>Privacy questions: privacy@saxinstitute.org.au</strong></div></div>`,
             },
             {
               id: "contact",
               title: "Who can I contact?",
-              body: `<div class="viz"><p class="viz-line">Email <a href="mailto:18andUp@saxinstitute.org.au">18andUp@saxinstitute.org.au</a> or call <strong>1300 45 11 45</strong>, Monday to Friday, 9am to 5pm AEST.</p><p class="viz-line">If the study raises anything difficult: Lifeline 13 11 14, Beyond Blue 1300 22 4636, 13YARN 13 92 76, or QLife 1800 184 527.</p><div class="viz-banner" style="background:#F3EFA1;border-left:4px solid #0C2340;padding:12px 14px;border-radius:0 10px 10px 0"><strong>Ethics complaints:</strong> UNSW HREC on 02 9385 6222 or humanethics@unsw.edu.au.</div></div>`,
+              body: `<div class="viz"><p class="viz-line">Email <a href="mailto:18andUp@saxinstitute.org.au">18andUp@saxinstitute.org.au</a> or call <strong>1300 45 11 45</strong>, Monday to Friday, 9am to 5pm AEST.</p><p class="viz-line">If the study raises anything difficult: Lifeline 13 11 14, Beyond Blue 1300 22 4636, 13YARN 13 92 76, or QLife 1800 184 527.</p><div class="viz-banner viz-banner-alert"><strong>Ethics complaints:</strong> UNSW HREC on 02 9385 6222 or humanethics@unsw.edu.au.</div></div>`,
             },
           ],
         },
@@ -7318,6 +7426,13 @@
         const wrap = document.createElement("div");
         wrap.className = "q-fields";
 
+        if (step.introHtml) {
+          const intro = document.createElement("div");
+          intro.className = "q-fields-intro";
+          intro.innerHTML = step.introHtml;
+          wrap.appendChild(intro);
+        }
+
         if (step.formStep) {
           const steppers = document.createElement("div");
           steppers.innerHTML = `
@@ -7345,6 +7460,112 @@
         });
 
         body.appendChild(wrap);
+      }
+
+      function fieldsStepComplete(step, stepIndex) {
+        const fields = (step && step.fields) || [];
+        return fields.every((f) => {
+          if (!f.required || f.type === "section") return true;
+          const val = (qAnswers[stepIndex] || {})[f.key];
+          if (f.type === "signature") return typeof val === "string" && val.startsWith("data:image");
+          return val != null && String(val).trim() !== "";
+        });
+      }
+
+      function bindSignaturePad(canvas, stepIndex, key, placeholder, clearBtn) {
+        const ctx = canvas.getContext("2d");
+        let drawing = false;
+        let dirty = false;
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+
+        const resize = () => {
+          const rect = canvas.getBoundingClientRect();
+          const prev = canvas.toDataURL();
+          canvas.width = Math.max(1, Math.floor(rect.width * ratio));
+          canvas.height = Math.max(1, Math.floor(rect.height * ratio));
+          ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+          ctx.lineWidth = 2.2;
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+          ctx.strokeStyle = "#0C2340";
+          if (dirty) {
+            const img = new Image();
+            img.onload = () => ctx.drawImage(img, 0, 0, rect.width, rect.height);
+            img.src = prev;
+          }
+        };
+        resize();
+
+        const pos = (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const src = e.touches ? e.touches[0] : e;
+          return { x: src.clientX - rect.left, y: src.clientY - rect.top };
+        };
+        const start = (e) => {
+          if (qViewOnly) return;
+          e.preventDefault();
+          drawing = true;
+          const p = pos(e);
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+        };
+        const move = (e) => {
+          if (!drawing || qViewOnly) return;
+          e.preventDefault();
+          const p = pos(e);
+          ctx.lineTo(p.x, p.y);
+          ctx.stroke();
+          dirty = true;
+          placeholder?.classList.add("has-ink");
+          canvas.parentElement?.classList.add("has-ink");
+          if (clearBtn) clearBtn.disabled = false;
+        };
+        const end = () => {
+          if (!drawing) return;
+          drawing = false;
+          if (dirty) {
+            setFieldAnswer(stepIndex, key, canvas.toDataURL("image/png"));
+            const nextBtn = document.getElementById("qNext");
+            const step = currentForm()?.steps[stepIndex];
+            if (nextBtn && step) nextBtn.disabled = !fieldsStepComplete(step, stepIndex);
+          }
+        };
+
+        canvas.addEventListener("mousedown", start);
+        canvas.addEventListener("mousemove", move);
+        window.addEventListener("mouseup", end);
+        canvas.addEventListener("touchstart", start, { passive: false });
+        canvas.addEventListener("touchmove", move, { passive: false });
+        canvas.addEventListener("touchend", end);
+        canvas.addEventListener("touchcancel", end);
+
+        return {
+          clear() {
+            const rect = canvas.getBoundingClientRect();
+            ctx.clearRect(0, 0, rect.width, rect.height);
+            dirty = false;
+            placeholder?.classList.remove("has-ink");
+            canvas.parentElement?.classList.remove("has-ink");
+            setFieldAnswer(stepIndex, key, "");
+            if (clearBtn) clearBtn.disabled = true;
+            const nextBtn = document.getElementById("qNext");
+            const step = currentForm()?.steps[stepIndex];
+            if (nextBtn && step) nextBtn.disabled = !fieldsStepComplete(step, stepIndex);
+          },
+          restore(dataUrl) {
+            if (!dataUrl) return;
+            const img = new Image();
+            img.onload = () => {
+              const rect = canvas.getBoundingClientRect();
+              ctx.drawImage(img, 0, 0, rect.width, rect.height);
+              dirty = true;
+              placeholder?.classList.add("has-ink");
+              canvas.parentElement?.classList.add("has-ink");
+              if (clearBtn) clearBtn.disabled = false;
+            };
+            img.src = dataUrl;
+          },
+        };
       }
 
       function setFieldAnswer(stepIndex, key, value) {
@@ -7427,6 +7648,41 @@
           hint.className = "wg-q-hint";
           hint.textContent = f.hint;
           box.appendChild(hint);
+        }
+
+        if (f.type === "signature") {
+          const shell = document.createElement("div");
+          shell.className = "q-signature";
+          const pad = document.createElement("div");
+          pad.className = "q-signature-pad";
+          const canvas = document.createElement("canvas");
+          const line = document.createElement("div");
+          line.className = "sig-line";
+          const placeholder = document.createElement("div");
+          placeholder.className = "sig-placeholder";
+          placeholder.textContent = qViewOnly ? "" : "Sign here";
+          pad.appendChild(canvas);
+          pad.appendChild(line);
+          if (!qViewOnly) pad.appendChild(placeholder);
+          shell.appendChild(pad);
+          const actions = document.createElement("div");
+          actions.className = "q-signature-actions";
+          const clearBtn = document.createElement("button");
+          clearBtn.type = "button";
+          clearBtn.textContent = "Clear";
+          clearBtn.disabled = true;
+          actions.appendChild(clearBtn);
+          if (!qViewOnly) shell.appendChild(actions);
+          box.appendChild(shell);
+          requestAnimationFrame(() => {
+            const api = bindSignaturePad(canvas, stepIndex, f.key, pad, clearBtn);
+            if (ans[f.key]) api.restore(ans[f.key]);
+            if (!qViewOnly) clearBtn.addEventListener("click", () => api.clear());
+            else {
+              canvas.style.pointerEvents = "none";
+            }
+          });
+          return box;
         }
 
         const opts = f.options || [];
@@ -7515,19 +7771,27 @@
         const syncClear = () => {
           clearBtn.hidden = !input.value || qViewOnly;
         };
+        const syncNext = () => {
+          const nextBtn = document.getElementById("qNext");
+          const step = currentForm()?.steps[stepIndex];
+          if (nextBtn && step?.type === "fields") nextBtn.disabled = !fieldsStepComplete(step, stepIndex);
+        };
         input.addEventListener("input", () => {
           setFieldAnswer(stepIndex, f.key, input.value);
           syncClear();
+          syncNext();
         });
         input.addEventListener("change", () => {
           setFieldAnswer(stepIndex, f.key, input.value);
           syncClear();
+          syncNext();
         });
         if (!qViewOnly) {
           clearBtn.addEventListener("click", () => {
             input.value = "";
             setFieldAnswer(stepIndex, f.key, "");
             syncClear();
+            syncNext();
             input.focus();
           });
         }
@@ -7809,11 +8073,15 @@
           nextBtn.textContent = "Next";
           nextBtn.classList.toggle("span-2", isFirst);
         }
-        nextBtn.disabled =
-          !qViewOnly &&
-          step.required === true &&
-          step.type === "single" &&
-          getSingleValue(qStep) === null;
+        if (qViewOnly) {
+          nextBtn.disabled = false;
+        } else if (step.type === "single" && step.required === true) {
+          nextBtn.disabled = getSingleValue(qStep) === null;
+        } else if (step.type === "fields") {
+          nextBtn.disabled = !fieldsStepComplete(step, qStep);
+        } else {
+          nextBtn.disabled = false;
+        }
 
         if (step.type === "multi") {
           /* checkbox class already applied in renderChoiceStep */
