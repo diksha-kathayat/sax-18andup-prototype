@@ -1686,6 +1686,140 @@
         font-weight: 500;
       }
 
+
+      /* Program tabs (WeGuide FILTER_BY_PROGRAM) */
+      .program-tab-container {
+        overflow-x: auto;
+        white-space: nowrap;
+        background: #f5f5f4;
+        height: 38px;
+        margin: 0 calc(-1 * var(--screen-pad)) 1rem;
+        padding: 0 var(--screen-pad);
+        border-bottom: 1px solid var(--gray-200);
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .program-tab-container::-webkit-scrollbar { display: none; }
+      .program-tab-container[hidden] { display: none; }
+      .program-tabs {
+        display: flex;
+        flex-direction: row;
+        gap: 1.25rem;
+        height: 100%;
+        align-items: stretch;
+      }
+      .program-tab {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        position: relative;
+        border: 0;
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+        font-family: var(--font-heading);
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: var(--gray-500);
+        white-space: nowrap;
+      }
+      .program-tab.active {
+        font-weight: 500;
+        color: var(--navy);
+      }
+      .program-tab.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: var(--navy);
+      }
+      .task-program {
+        margin: 0.15rem 0 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        color: var(--muted);
+        font-size: 0.75rem;
+        line-height: 1.3;
+      }
+      .task-program svg {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+
+      /* Pick program */
+      .screen[data-screen="pick-program"] .info-main,
+      .screen[data-screen="program-overview"] .info-main,
+      .screen[data-screen="enroll-success"] .info-main {
+        padding-bottom: calc(var(--home-indicator-h) + 1.25rem);
+      }
+      .pick-main {
+        padding-top: 0.25rem;
+      }
+      .pick-main > p {
+        margin: -0.25rem 0 1.25rem;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .pick-card-list {
+        display: grid;
+        gap: 0.9rem;
+      }
+      .pick-card {
+        text-align: left;
+        border: 1px solid var(--gray-200);
+        border-radius: 16px;
+        padding: 1rem 1.05rem;
+        background: #fff;
+        box-shadow: 0 6px 18px rgba(12, 35, 64, 0.06);
+        cursor: pointer;
+        color: var(--navy);
+      }
+      .pick-card.sky { border-top: 4px solid #71C5E8; }
+      .pick-card.lime { border-top: 4px solid #8EDD65; }
+      .pick-card.navy { border-top: 4px solid #0C2340; }
+      .pick-card h2 {
+        margin: 0 0 0.4rem;
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      .pick-card p {
+        margin: 0 0 0.65rem;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.45;
+      }
+      .pick-card .learn {
+        border: 0;
+        background: transparent;
+        color: var(--navy);
+        font: inherit;
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 0;
+        cursor: pointer;
+      }
+      .enroll-success {
+        text-align: center;
+        padding: 1.5rem 0.5rem;
+      }
+      .enroll-success h1 {
+        font-family: var(--font-heading);
+        font-size: 1.45rem;
+        color: var(--navy);
+        margin: 0 0 0.5rem;
+      }
+      .enroll-success p {
+        color: var(--muted);
+        margin: 0 0 1.5rem;
+        line-height: 1.5;
+      }
+
       /* Home */
       .screen[data-screen="home"] .ion-content > main.home-main {
         padding-top: calc(var(--status-h) + 1.15rem);
@@ -2200,6 +2334,10 @@
         color: var(--navy);
         flex: 1;
         line-height: 1.35;
+      }
+      .wg-text-list li .label-secondary {
+        color: var(--navy);
+        font-weight: 500;
       }
 
       .wg-text-list li .value {
@@ -5114,6 +5252,9 @@
               <div class="logo-wrapper">
                 <img src="./figma-home-logo.png" alt="18 and Up" />
               </div>
+              <div class="program-tab-container" id="programTabBar" hidden>
+                <div class="program-tabs" id="programTabs" role="tablist" aria-label="Programs"></div>
+              </div>
               <h1 class="greeting-line" id="journeyGreeting">Good Morning, Diksha 👋</h1>
               <p class="journey-today" id="journeyToday">Today</p>
               <ul class="wg-task-list" id="todayTasks"></ul>
@@ -5204,6 +5345,61 @@
           </div>
         </section>
 
+        <!-- PICK PROGRAM -->
+        <section class="screen" data-screen="pick-program">
+          <header class="ion-header with-border">
+            <div class="ion-toolbar">
+              <button type="button" class="back" data-go="settings">Back</button>
+              <div class="ion-title">Getting started</div>
+              <span></span>
+            </div>
+          </header>
+          <div class="ion-content">
+            <main class="info-main pick-main">
+              <h1 class="wg-h-xl">Where do you want to start?</h1>
+              <p>Choose another program to join. You stay enrolled in 18 and Up. Start with the program that feels most useful right now.</p>
+              <div class="pick-card-list" id="pickProgramList"></div>
+              <p class="viz-line" id="pickProgramEmpty" hidden>You are already enrolled in every available program.</p>
+            </main>
+          </div>
+        </section>
+
+        <!-- PROGRAM OVERVIEW / CONFIRM -->
+        <section class="screen" data-screen="program-overview">
+          <header class="ion-header with-border">
+            <div class="ion-toolbar">
+              <button type="button" class="back" data-go="pick-program">Back</button>
+              <div class="ion-title" id="programOverviewTitle">Program</div>
+              <span></span>
+            </div>
+          </header>
+          <div class="ion-content">
+            <main class="info-main pick-main">
+              <h1 class="wg-h-xl" id="programOverviewHeading">Program</h1>
+              <div class="viz" id="programOverviewBody"></div>
+            </main>
+          </div>
+          <footer class="ion-footer">
+            <div class="ion-toolbar">
+              <button type="button" class="ion-button primary" id="programEnrollBtn">Enrol in program</button>
+            </div>
+          </footer>
+        </section>
+
+        <!-- ENROLL SUCCESS -->
+        <section class="screen" data-screen="enroll-success">
+          <div class="ion-content">
+            <main class="info-main enroll-success">
+              <div class="chip green" style="width:64px;height:64px;border-radius:20px;margin:2rem auto 1rem" aria-hidden="true">
+                <img src="./figma-check-icon.svg" alt="" style="width:32px;height:32px" />
+              </div>
+              <h1 id="enrollSuccessHeading">Great, you are enrolled</h1>
+              <p id="enrollSuccessBody">You can now start your program.</p>
+              <button type="button" class="ion-button primary" id="enrollSuccessContinue" style="max-width:280px;margin:0 auto">Get started</button>
+            </main>
+          </div>
+        </section>
+
         <!-- SETTINGS -->
         <section class="screen" data-screen="settings">
           <header class="ion-header with-border">
@@ -5239,6 +5435,10 @@
                 </li>
                 <li data-toast="18 and Up information (demo)">
                   <span class="label">18 and Up Information</span>
+                  <span class="value"><span class="chev">›</span></span>
+                </li>
+                <li id="settingsJoinProgram">
+                  <span class="label label-secondary">Join additional program</span>
                   <span class="value"><span class="chev">›</span></span>
                 </li>
                 <li id="settingsContact">
@@ -5657,6 +5857,9 @@
           updateHomeGreeting();
           renderHomeTasks();
         }
+        if (screen === "pick-program") {
+          renderPickProgramList();
+        }
         if (screen === "program") bindResourcesHub();
         updatePersistentBookingCta(screen);
       }
@@ -5889,12 +6092,34 @@
       });
 
       document.getElementById("logoutBtn").addEventListener("click", () => {
+        enrolledProgramIds = ["main"];
+        activeProgramFilter = null;
+        pendingProgramId = null;
+        ["family_links", "contact_update", "wellbeing_check", "lifestyle_snap"].forEach((id) => {
+          visibleSurveys.delete(id);
+          completedForms.delete(id);
+          delete completedAtByForm[id];
+        });
         go("onboarding");
       });
 
       document.getElementById("settingsContact")?.addEventListener("click", () => {
         contactReturnScreen = "settings";
         go("contact");
+      });
+
+      document.getElementById("settingsJoinProgram")?.addEventListener("click", () => {
+        renderPickProgramList();
+        go("pick-program");
+      });
+
+      document.getElementById("programEnrollBtn")?.addEventListener("click", () => {
+        enrollPendingProgram();
+      });
+
+      document.getElementById("enrollSuccessContinue")?.addEventListener("click", () => {
+        go("journey");
+        renderHomeTasks();
       });
 
       document.getElementById("contactClose")?.addEventListener("click", () => {
@@ -6030,7 +6255,165 @@
         intro: "Introduction to 18 and Up",
         econsent: "eConsent: 18 and Up",
         demo: "Your demographics",
+        family_links: "Family links survey",
+        contact_update: "Keep in touch",
+        wellbeing_check: "Wellbeing check-in",
+        lifestyle_snap: "Lifestyle snapshot",
       };
+
+      const PROGRAM_CATALOG = {
+        main: {
+          id: "main",
+          name: "18 and Up",
+          color: "sky",
+          description: "The main enrolment pathway for the national 18 and Up Study.",
+          detailHtml: `
+            <p class="viz-line">You are already enrolled in this program. It includes the introduction, eConsent, and demographics forms.</p>
+          `,
+          forms: ["intro", "econsent", "demo"],
+        },
+        family: {
+          id: "family",
+          name: "Family links",
+          color: "lime",
+          description: "Help researchers understand family and kin connections across generations.",
+          detailHtml: `
+            <p class="viz-kicker">Optional add-on program</p>
+            <p class="viz-line">Family links collects a little more detail about how you are connected to others in 45 and Up / 18 and Up.</p>
+            <div class="viz-banner">You will get two short forms in Your Journey after you join.</div>
+            <div class="viz-rail" style="margin-top:12px">
+              <div class="viz-rail-item"><span class="viz-rail-num">1</span><div><strong>Family links survey</strong><span>Who you are connected to</span></div></div>
+              <div class="viz-rail-item"><span class="viz-rail-num">2</span><div><strong>Keep in touch</strong><span>Preferred contact details</span></div></div>
+            </div>
+          `,
+          forms: ["family_links", "contact_update"],
+        },
+        wellbeing: {
+          id: "wellbeing",
+          name: "Wellbeing check-in",
+          color: "navy",
+          description: "A short check-in on how you are travelling between main surveys.",
+          detailHtml: `
+            <p class="viz-kicker">Optional add-on program</p>
+            <p class="viz-line">Wellbeing check-in is a lighter pathway you can join alongside 18 and Up. It does not replace your main enrolment forms.</p>
+            <div class="viz-banner">Two short forms will appear in Your Journey once you enrol.</div>
+            <div class="viz-rail" style="margin-top:12px">
+              <div class="viz-rail-item"><span class="viz-rail-num">1</span><div><strong>Wellbeing check-in</strong><span>How you have been feeling lately</span></div></div>
+              <div class="viz-rail-item"><span class="viz-rail-num">2</span><div><strong>Lifestyle snapshot</strong><span>Sleep, movement and daily routine</span></div></div>
+            </div>
+          `,
+          forms: ["wellbeing_check", "lifestyle_snap"],
+        },
+      };
+
+      let enrolledProgramIds = ["main"];
+      let activeProgramFilter = null; // null = All Programs
+      let pendingProgramId = null;
+
+      function getProgram(id) {
+        return PROGRAM_CATALOG[id] || null;
+      }
+
+      function enrolledPrograms() {
+        return enrolledProgramIds.map(getProgram).filter(Boolean);
+      }
+
+      function availablePrograms() {
+        return Object.values(PROGRAM_CATALOG).filter((p) => p.id !== "main" && !enrolledProgramIds.includes(p.id));
+      }
+
+      function formProgramId(formId) {
+        for (const prog of Object.values(PROGRAM_CATALOG)) {
+          if (prog.forms.includes(formId)) return prog.id;
+        }
+        return "main";
+      }
+
+      function formIdsForFilter() {
+        if (!activeProgramFilter) {
+          return enrolledPrograms().flatMap((p) => p.forms);
+        }
+        const prog = getProgram(activeProgramFilter);
+        return prog ? prog.forms.slice() : [];
+      }
+
+      const FOLDER_ICON = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" stroke="currentColor" stroke-width="1.7"/></svg>`;
+
+      function renderProgramTabs() {
+        const bar = document.getElementById("programTabBar");
+        const tabs = document.getElementById("programTabs");
+        if (!bar || !tabs) return;
+        const enrolled = enrolledPrograms();
+        if (enrolled.length <= 1) {
+          bar.hidden = true;
+          tabs.innerHTML = "";
+          activeProgramFilter = null;
+          return;
+        }
+        bar.hidden = false;
+        const items = [{ id: null, name: "All Programs" }, ...enrolled.map((p) => ({ id: p.id, name: p.name }))];
+        tabs.innerHTML = "";
+        items.forEach((item) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "program-tab" + ((activeProgramFilter === item.id) || (item.id === null && activeProgramFilter === null) ? " active" : "");
+          btn.textContent = item.name;
+          btn.setAttribute("role", "tab");
+          btn.addEventListener("click", () => {
+            activeProgramFilter = item.id;
+            renderProgramTabs();
+            renderHomeTasks();
+          });
+          tabs.appendChild(btn);
+        });
+      }
+
+      function renderPickProgramList() {
+        const list = document.getElementById("pickProgramList");
+        const empty = document.getElementById("pickProgramEmpty");
+        if (!list) return;
+        list.innerHTML = "";
+        const available = availablePrograms();
+        if (empty) empty.hidden = available.length > 0;
+        available.forEach((prog) => {
+          const card = document.createElement("button");
+          card.type = "button";
+          card.className = `pick-card ${prog.color}`;
+          card.innerHTML = `<h2 class="wg-h-xxs">${prog.name}</h2><p>${prog.description}</p><span class="learn">Learn more</span>`;
+          card.addEventListener("click", () => openProgramOverview(prog.id));
+          list.appendChild(card);
+        });
+      }
+
+      function openProgramOverview(programId) {
+        const prog = getProgram(programId);
+        if (!prog || enrolledProgramIds.includes(programId)) return;
+        pendingProgramId = programId;
+        const title = document.getElementById("programOverviewTitle");
+        const heading = document.getElementById("programOverviewHeading");
+        const body = document.getElementById("programOverviewBody");
+        if (title) title.textContent = prog.name;
+        if (heading) heading.textContent = prog.name;
+        if (body) body.innerHTML = prog.detailHtml;
+        go("program-overview");
+      }
+
+      function enrollPendingProgram() {
+        if (!pendingProgramId) return;
+        const prog = getProgram(pendingProgramId);
+        if (!prog || enrolledProgramIds.includes(pendingProgramId)) return;
+        enrolledProgramIds.push(pendingProgramId);
+        prog.forms.forEach((id) => visibleSurveys.add(id));
+        activeProgramFilter = null;
+        const successHeading = document.getElementById("enrollSuccessHeading");
+        const successBody = document.getElementById("enrollSuccessBody");
+        if (successHeading) successHeading.textContent = `Great, you are enrolled in ${prog.name}!`;
+        if (successBody) {
+          successBody.textContent = "You can now start your program. Two new forms are ready in Your Journey.";
+        }
+        pendingProgramId = null;
+        go("enroll-success");
+      }
 
       const STAGE_PATHS = {
         enrol: ["intro", "econsent", "demo"],
@@ -6556,6 +6939,153 @@
             },
           ],
         },
+        family_links: {
+          title: "Family links survey",
+          steps: [
+            rich({
+              title: "About Family links",
+              html: `
+                <div class="viz">
+                  <p class="viz-kicker">Optional add-on program</p>
+                  <p class="viz-line">Family links helps researchers understand how people in 18 and Up are connected to others in 45 and Up.</p>
+                  <div class="viz-banner">This is short. You can skip any question you would rather not answer.</div>
+                </div>`,
+            }),
+            {
+              type: "single",
+              required: true,
+              key: "family_relation",
+              title: "How are you connected to someone in 45 and Up or 18 and Up?",
+              options: [
+                "Child or step-child",
+                "Grandchild",
+                "Partner or spouse",
+                "Sibling",
+                "Chosen family or close kin",
+                "I am a 45 and Up participant",
+                "Prefer not to say",
+              ],
+            },
+            {
+              type: "single",
+              required: true,
+              key: "family_others",
+              title: "Do other people in your family also take part, or plan to?",
+              options: ["Yes", "No", "I am not sure", "Prefer not to say"],
+            },
+            {
+              type: "single",
+              key: "family_invite",
+              title: "Would you like the study team to send an invitation to someone in your family? (optional)",
+              options: ["Yes, please contact me about this", "Not right now", "Prefer not to say"],
+            },
+          ],
+        },
+        contact_update: {
+          title: "Keep in touch",
+          steps: [
+            rich({
+              title: "Keep in touch",
+              html: `
+                <div class="viz">
+                  <p class="viz-kicker">Family links</p>
+                  <p class="viz-line">Tell us the best way to reach you about Family links and related 18 and Up updates.</p>
+                </div>`,
+            }),
+            {
+              type: "single",
+              required: true,
+              key: "contact_pref",
+              title: "What is the best way to contact you?",
+              options: ["Email", "SMS", "Phone call", "No preference"],
+            },
+            {
+              type: "single",
+              key: "contact_time",
+              title: "When is a good time to call, if needed?",
+              options: ["Morning", "Afternoon", "Evening", "Do not call"],
+            },
+            {
+              type: "fields",
+              title: "Confirm your details",
+              fields: [
+                { key: "family_email", type: "email", label: "Email", required: true, defaultValue: "diksha+sax@weguide.health" },
+                { key: "family_mobile", type: "tel", label: "Mobile (optional)", placeholder: "+61 …" },
+              ],
+            },
+          ],
+        },
+        wellbeing_check: {
+          title: "Wellbeing check-in",
+          steps: [
+            rich({
+              title: "Wellbeing check-in",
+              html: `
+                <div class="viz">
+                  <p class="viz-kicker">Optional add-on program</p>
+                  <p class="viz-line">A short check-in on how you have been travelling. This does not replace your main 18 and Up surveys.</p>
+                  <div class="viz-banner">If this raises anything difficult: Lifeline 13 11 14 · Beyond Blue 1300 22 4636 · 13YARN 13 92 76</div>
+                </div>`,
+            }),
+            {
+              type: "slider",
+              key: "wellbeing_overall",
+              title: "Overall, how have you been feeling lately?",
+              min: 0,
+              max: 10,
+              step: 1,
+              defaultValue: 6,
+              minLabel: "Not so good",
+              maxLabel: "Really well",
+            },
+            {
+              type: "single",
+              required: true,
+              key: "wellbeing_stress",
+              title: "How often have you felt stressed in the past two weeks?",
+              options: ["Rarely or never", "Some of the time", "Often", "Most of the time", "Prefer not to say"],
+            },
+            {
+              type: "textarea",
+              key: "wellbeing_notes",
+              title: "Anything you would like to add? (optional)",
+              placeholder: "You can leave this blank.",
+            },
+          ],
+        },
+        lifestyle_snap: {
+          title: "Lifestyle snapshot",
+          steps: [
+            rich({
+              title: "Lifestyle snapshot",
+              html: `
+                <div class="viz">
+                  <p class="viz-kicker">Wellbeing check-in</p>
+                  <p class="viz-line">A few questions about sleep, movement and daily routine. Skip anything you would rather not answer.</p>
+                </div>`,
+            }),
+            {
+              type: "single",
+              required: true,
+              key: "sleep_quality",
+              title: "How would you describe your sleep over the past week?",
+              options: ["Very good", "Good", "Fair", "Poor", "Prefer not to say"],
+            },
+            {
+              type: "single",
+              required: true,
+              key: "move_days",
+              title: "On how many days in the past week did you do 30 minutes or more of physical activity?",
+              options: ["0 days", "1 to 2 days", "3 to 4 days", "5 to 7 days", "Prefer not to say"],
+            },
+            {
+              type: "single",
+              key: "routine",
+              title: "How settled has your daily routine felt lately?",
+              options: ["Very settled", "Mostly settled", "A bit up and down", "Quite unsettled", "Prefer not to say"],
+            },
+          ],
+        },
       };
 
       const MILESTONES = [
@@ -6831,11 +7361,11 @@
 
 
       function todayTaskIds() {
-        return ASSESSMENT_ORDER.filter((id) => !completedForms.has(id) && visibleSurveys.has(id));
+        return formIdsForFilter().filter((id) => !completedForms.has(id) && visibleSurveys.has(id));
       }
 
       function allKnownFormIds() {
-        return ASSESSMENT_ORDER.slice();
+        return enrolledPrograms().flatMap((p) => p.forms);
       }
 
       function bindTaskButtons(root) {
@@ -7122,16 +7652,25 @@
         today.innerHTML = "";
         done.innerHTML = "";
         updateHomeGreeting();
+        renderProgramTabs();
 
-        const completedIds = allKnownFormIds().filter((id) => completedForms.has(id)).reverse();
+        const showProgramMeta = enrolledProgramIds.length > 1;
+        const scopedIds = formIdsForFilter();
+
+        const completedIds = scopedIds.filter((id) => completedForms.has(id)).reverse();
         completedIds.forEach((id) => {
           const when = completedAtByForm[id] ? formatCompletedAt(completedAtByForm[id]) : "";
+          const prog = getProgram(formProgramId(id));
+          const progMeta = showProgramMeta && prog
+            ? `<p class="task-program">${FOLDER_ICON}<span>${prog.name}</span></p>`
+            : "";
           const li = document.createElement("li");
           li.innerHTML = `
               <div class="chip green" aria-hidden="true"><img src="./figma-check-icon.svg" alt="" /></div>
               <div class="task-copy">
-                <h3 class="wg-h-xxs">${TASK_META[id]}</h3>
+                <h3 class="wg-h-xxs">${TASK_META[id] || id}</h3>
                 ${when ? `<p class="task-meta">${when}</p>` : ""}
+                ${progMeta}
               </div>
               <button type="button" class="ion-button task-view" data-form="${id}" data-viewonly="true">View</button>`;
           done.appendChild(li);
@@ -7139,22 +7678,24 @@
         if (doneLabel) doneLabel.hidden = completedIds.length === 0;
         done.hidden = completedIds.length === 0;
 
-        // Only scheduled (visible) incomplete forms appear, each in Start status
-        const displayIds = ASSESSMENT_ORDER.filter(
-          (id) => !completedForms.has(id) && visibleSurveys.has(id)
-        );
+        const displayIds = scopedIds.filter((id) => !completedForms.has(id) && visibleSurveys.has(id));
         displayIds.forEach((id) => {
+          const prog = getProgram(formProgramId(id));
+          const progMeta = showProgramMeta && prog
+            ? `<p class="task-program">${FOLDER_ICON}<span>${prog.name}</span></p>`
+            : "";
           const li = document.createElement("li");
           li.innerHTML = `
             <div class="chip blue" aria-hidden="true"><img src="./figma-doc-icon.svg" alt="" /></div>
             <div class="task-copy">
-              <h3 class="wg-h-xxs">${TASK_META[id]}</h3>
+              <h3 class="wg-h-xxs">${TASK_META[id] || id}</h3>
+              ${progMeta}
             </div>
             <button type="button" class="ion-button task-start" data-form="${id}">Start</button>`;
           today.appendChild(li);
         });
 
-        const allCaughtUp = displayIds.length === 0 && completedIds.length > 0 && !hasOutstandingJourneyWork();
+        const allCaughtUp = displayIds.length === 0 && completedIds.length > 0;
         today.hidden = displayIds.length === 0;
         if (todayEmpty) todayEmpty.hidden = !allCaughtUp;
 
@@ -8113,6 +8654,10 @@
           completedForms.add(qFormId);
           completedAtByForm[qFormId] = new Date();
           renderHomeTasks();
+          if (formProgramId(qFormId) !== "main") {
+            go("journey");
+            return;
+          }
           showMilestone(qFormId);
           return;
         }
@@ -8196,6 +8741,9 @@
         "milestone",
         "res-section",
         "res-detail",
+        "pick-program",
+        "program-overview",
+        "enroll-success",
       ]);
       let resolvedStart = startParam === "home" ? "journey" : startParam;
       if (!resolvedStart || !allowedStarts.has(resolvedStart)) resolvedStart = "onboarding";
