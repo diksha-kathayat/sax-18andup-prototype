@@ -8,6 +8,8 @@ UI follows **WeGuide frontend** patterns from [`weguide-medical-frontend`](file:
 
 [https://diksha-kathayat.github.io/sax-18andup-prototype/](https://diksha-kathayat.github.io/sax-18andup-prototype/)
 
+The live site asks for access details before the prototype loads. Username and password are not stored in the page source. Local `npm start` stays unlocked for development.
+
 ## Run locally
 
 ```bash

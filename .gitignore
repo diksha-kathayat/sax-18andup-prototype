@@ -1,6 +1,7 @@
 .DS_Store
 *.log
 node_modules/
+pages-dist/
 
 # Local screenshots / scratch (not part of the live prototype)
 18up-page.png

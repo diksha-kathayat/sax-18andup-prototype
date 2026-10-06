@@ -24,13 +24,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Protect prototype
+        env:
+          PROTOTYPE_USER: ${{ secrets.PROTOTYPE_USER }}
+          PROTOTYPE_PASS: ${{ secrets.PROTOTYPE_PASS }}
+        run: node scripts/protect-pages.mjs
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: prototype
+          path: pages-dist
 
       - name: Deploy to GitHub Pages
         id: deployment
